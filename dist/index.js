@@ -16,7 +16,7 @@ exports.getDniData = exports.getRucData = void 0;
 const node_fetch_1 = __importDefault(require("node-fetch"));
 const url = "https://api.apis.net.pe/v1/";
 /**
- * Gets RUC data
+ * Gets RUC data from RUC
  * @param ruc
  * @returns RUCinfo
  */
@@ -24,7 +24,10 @@ function getRucData(ruc) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let response = yield (0, node_fetch_1.default)(url + 'ruc?numero=' + ruc);
-            return yield response.json();
+            let json = yield response.json();
+            if (json.includes("error"))
+                throw Error(json.error);
+            return json;
         }
         catch (error) {
             throw Error("Error getting RUC data.");
@@ -32,11 +35,19 @@ function getRucData(ruc) {
     });
 }
 exports.getRucData = getRucData;
-function getDniData(ruc) {
+/**
+ * Gets Dni data from Dni
+ * @param dni
+ * @returns DNIinfo
+ */
+function getDniData(dni) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            let response = yield (0, node_fetch_1.default)(url + 'dni?numero=' + ruc);
-            return yield response.json();
+            let response = yield (0, node_fetch_1.default)(url + 'dni?numero=' + dni);
+            let json = yield response.json();
+            if (json.includes("error"))
+                throw Error(json.error);
+            return yield json;
         }
         catch (error) {
             throw Error("Error getting DNI data.");
@@ -44,3 +55,4 @@ function getDniData(ruc) {
     });
 }
 exports.getDniData = getDniData;
+getRucData("20607110303").then(console.log);

@@ -10,7 +10,9 @@ export async function getRucData(ruc: string): Promise<RUCinfo> {
 
     try {
         let response = await fetch(url + 'ruc?numero=' + ruc);
-        return await response.json() as RUCinfo;
+        let json = await response.json();
+        if (json.includes("error")) throw Error(json.error);
+        return json as RUCinfo;
     } catch (error) {
         throw Error("Error getting RUC data.");
     }
@@ -23,8 +25,12 @@ export async function getRucData(ruc: string): Promise<RUCinfo> {
 export async function getDniData(dni: string): Promise<DNIinfo> {
     try {
         let response = await fetch(url + 'dni?numero=' + dni);
-        return await response.json() as DNIinfo;
+        let json = await response.json();
+        if (json.includes("error")) throw Error(json.error);
+        return await json as DNIinfo;
     } catch (error) {
         throw Error("Error getting DNI data.");
     }
 }
+
+getRucData("20607110303").then(console.log)
