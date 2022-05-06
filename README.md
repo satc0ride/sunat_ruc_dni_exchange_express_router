@@ -7,13 +7,13 @@ Esta librería utilzia la herramienta https://apis.net.pe/ para conseguir los da
 Utilice NPM para instalar.
 
 ```bash
-npm i 
+npm i peru_ruc_dni_exchange
 ```
 
 ## Usage
 
 ```typescript
-import { getRucData, getDniData } from '';
+import { getRucData, getDniData } from 'peru_ruc_dni_exchange';
 
 getRucData("20607110302").then(console.log).catch(console.warn);
 
