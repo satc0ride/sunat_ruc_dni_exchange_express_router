@@ -1,6 +1,6 @@
 {
   "name": "peru_ruc_dni_exchange",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Consulta de RUC, DNI y Tipo de Cambio de Sunat. Perú",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
